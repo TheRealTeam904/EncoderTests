@@ -17,7 +17,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-	private WPI_TalonSRX MotorWithIntegratedEncoder = new WPI_TalonSRX(0); // CAN ID of the motor
+	// This robot has 2 encoders:
+	//   one connected through a Talon SRX motor controller (integrated encoder), and
+	//   one connected directly to the RoboRIO (separate encoder).
+	
+	private WPI_TalonSRX MotorWithIntegratedEncoder = new WPI_TalonSRX(0); // CAN ID of the motor with the integrated encoder
 	
 	private Encoder SeparateEncoder = new Encoder(0, 1); // 2 DIO ports on the RoboRIO, connected to yellow and green wires of encoder
 	
