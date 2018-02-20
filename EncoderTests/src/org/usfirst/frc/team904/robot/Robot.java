@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,9 +22,11 @@ public class Robot extends IterativeRobot {
 	//   one connected through a Talon SRX motor controller (integrated encoder), and
 	//   one connected directly to the RoboRIO (separate encoder).
 	
-	private WPI_TalonSRX MotorWithIntegratedEncoder = new WPI_TalonSRX(0); // CAN ID of the motor with the integrated encoder
+	private WPI_TalonSRX MotorWithIntegratedEncoder = new WPI_TalonSRX(2); // CAN ID of the motor with the integrated encoder
 	
 	private Encoder SeparateEncoder = new Encoder(0, 1); // 2 DIO ports on the RoboRIO, connected to yellow and green wires of encoder
+	
+	private Joystick joy = new Joystick(0);
 	
 	@Override
 	public void robotInit() {
@@ -34,8 +37,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
-		
 		SmartDashboard.putNumber("integrated encoder", MotorWithIntegratedEncoder.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("separate encoder", SeparateEncoder.getDistance());
+		MotorWithIntegratedEncoder.set(joy.getY());
 	}
 }
